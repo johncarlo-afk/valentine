@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<!-- Romantic Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Playfair Display', serif;
+        background: linear-gradient(135deg, #120318, #2b0f3f, #3a0f2e);
+        color: #ffe6f0;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 1.25rem;
+        max-width: 520px;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    button {
+        padding: 16px 38px;
+        font-size: 1.15rem;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        margin: 12px;
+        transition: all 0.3s ease;
+        font-family: 'Playfair Display', serif;
+    }
+
+    #yesBtn {
+        background: linear-gradient(135deg, #ff4d8d, #ff1e56);
+        color: white;
+        box-shadow: 0 0 20px rgba(255, 77, 141, 0.6);
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.12);
+    }
+
+    #noBtn {
+        background: #5a5a5a;
+        color: white;
+        position: absolute;
+    }
+
+    .hearts {
+        position: fixed;
+        bottom: -10px;
+        font-size: 22px;
+        animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    #message {
+        font-size: 2rem;
+        margin-top: 25px;
+        display: none;
+    }
+
+    .tap-note {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-top: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hi my love ❤️</h1>
+    <p>
+        I don’t always say this enough,  
+        but you mean more to me than words can explain.  
+        Every laugh, every moment, every memory with you  
+        is something I’ll always cherish.
+        <br><br>
+        So today, I just want to ask from the heart…
+    </p>
+
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <div>
+        <button id="yesBtn">YES, ALWAYS 💖</button>
+        <button id="noBtn">NO 😢</button>
+    </div>
+
+    <div id="message">
+        You make my world brighter every day 💞  
+        Happy Valentine’s Day, my love 🌹
+    </div>
+
+    <div class="tap-note">
+        (tap anywhere for music 🎶)
+    </div>
+</div>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" autoplay loop muted>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const music = document.getElementById("bgMusic");
+
+    // Unmute music on any interaction
+    document.addEventListener("click", () => {
+        music.muted = false;
+        music.play();
+    }, { once: true });
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 60);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+        message.style.display = "block";
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+        createHearts();
+    });
+
+    function createHearts() {
+        for (let i = 0; i < 35; i++) {
+            const heart = document.createElement("div");
+            heart.className = "hearts";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 6000);
+        }
+    }
+</script>
+
+</body>
+</html>
